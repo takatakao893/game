@@ -26,22 +26,19 @@ function triangle(fig,x1,y1,x2,y2,x3,y3){
 
     let S = V;
     // 並行移動
-    S[0] = [S[0][0]+(mouse_x/120-2),S[0][1]+(mouse_y/120-2),S[0][2]+2];
-    S[1] = [S[1][0]+(mouse_x/120-2),S[1][1]+(mouse_y/120-2),S[1][2]+2];
-    S[2] = [S[2][0]+(mouse_x/120-2),S[2][1]+(mouse_y/120-2),S[2][2]+2];
-    S[3] = [S[3][0]+(mouse_x/120-2),S[3][1]+(mouse_y/120-2),S[3][2]+2];
+    for(let i=0; i<4; i++){
+      S[i] = [S[i][0]+(mouse_x/120-2),S[i][1]+(mouse_y/120-2),S[i][2]+2];
+    }
 
     // ピンホールカメラ (透視投影)
-    S[0] = [S[0][0]/S[0][2], S[0][1]/S[0][2]];
-    S[1] = [S[1][0]/S[1][2], S[1][1]/S[1][2]];
-    S[2] = [S[2][0]/S[2][2], S[2][1]/S[2][2]];
-    S[3] = [S[3][0]/S[3][2], S[3][1]/S[3][2]];
+    for(let i=0; i<4; i++){
+      S[i] = [S[i][0]/S[i][2], S[i][1]/S[i][2]];
+    }
 
     // 拡大 (画面の大きさに合わせて)
-    S[0] = [S[0][0]/2*width+width/2, S[0][1]/2*height+height/2];
-    S[1] = [S[1][0]/2*width+width/2, S[1][1]/2*height+height/2];
-    S[2] = [S[2][0]/2*width+width/2, S[2][1]/2*height+height/2];
-    S[3] = [S[3][0]/2*width+width/2, S[3][1]/2*height+height/2];
+    for(let i=0; i<4; i++){
+      S[i] = [S[i][0]/2*width+width/2, S[i][1]/2*height+height/2];
+    }
 
     triangle(context,S[0][0],S[0][1],S[2][0],S[2][1],S[1][0],S[1][1]);
     triangle(context,S[0][0],S[0][1],S[1][0],S[1][1],S[3][0],S[3][1]);
