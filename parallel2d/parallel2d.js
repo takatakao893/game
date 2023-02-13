@@ -20,13 +20,15 @@ function MouseMoveFunc(e){
   // クライアント座標系を基点としたマウスカーソルの座標を取得
   var mouse_x = e.clientX-100;
   var mouse_y = e.clientY-100;
-  let array=[
+  let V=[
     [240,240],
     [120,60],
     [360,120]
   ]
-  triangle(context,array[0][0]+mouse_x,array[0][1]+mouse_y,
-    array[1][0]+mouse_x,array[1][1]+mouse_y,array[2][0]+mouse_x,array[2][1]+mouse_y)
+  let S=V;
+
+  triangle(context,S[0][0]+mouse_x,S[0][1]+mouse_y,S[1][0]+mouse_x,S[1][1]+mouse_y,
+    S[2][0]+mouse_x,S[2][1]+mouse_y)
 
 }
 
