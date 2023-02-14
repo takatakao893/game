@@ -58,5 +58,4 @@ function rotate(){
 }
 
 setInterval("rotate()",20);
-  
-    
+
