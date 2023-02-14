@@ -31,30 +31,24 @@ function rotate(){
     degree+=1
     r=(degree*Math.PI)/180
     let S = array;
+    let vx = new Array(3);
+    let vy = new Array(3);
+    let x = new Array(3);
+    let y = new Array(3);
     // 三角形の重心を求める
     let c = center(S);
-    // 回転中心座標から回転する座標へのベクトルを求める
-    let vx1 = S[0][0] - c[0];
-    let vy1 = S[0][1] - c[1];
-    // ベクトルを回転
-    let x1 = vx1*Math.cos(r) - vy1*Math.sin(r);
-    let y1 = vx1*Math.sin(r) + vy1*Math.cos(r);
-    x1+=c[0];
-    y1+=c[1];
-    let vx2 = S[1][0] - c[0];
-    let vy2 = S[1][1] - c[1];
-    let x2 = vx2*Math.cos(r) - vy2*Math.sin(r);
-    let y2 = vx2*Math.sin(r) + vy2*Math.cos(r);
-    x2+=c[0];
-    y2+=c[1];
-    let vx3 = S[2][0] - c[0];
-    let vy3 = S[2][1] - c[1];
-    let x3 = vx3*Math.cos(r) - vy3*Math.sin(r);
-    let y3 = vx3*Math.sin(r) + vy3*Math.cos(r);
-    x3+=c[0];
-    y3+=c[1];
+    for(let i=0; i<3; i++){
+        // 回転中心座標から回転する座標へのベクトルを求める
+        vx[i] = S[i][0] - c[0];
+        vy[i] = S[i][1] - c[1];
+        // ベクトルを回転
+        x[i] = vx[i]*Math.cos(r) - vy[i]*Math.sin(r);
+        y[i] = vx[i]*Math.sin(r) + vy[i]*Math.cos(r);
+        x[i]+=c[0];
+        y[i]+=c[1];
+    }
 
-    triangle(context,x1,y1,x2,y2,x3,y3)
+    triangle(context,x[0],y[0],x[1],y[1],x[2],y[2])
 }
 
 setInterval("rotate()",20);
