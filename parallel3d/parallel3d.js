@@ -21,6 +21,12 @@ function triangle(fig,x1,y1,x2,y2,x3,y3){
       [0, 0, 1],
       [0, -1, 0]
     ]
+    let F = [
+      [0, 1, 2],
+      [0, 1, 3],
+      [1, 2, 3],
+      [0, 2, 3]
+    ]
     let width = canvas.width;
     let height = canvas.height;
 
@@ -40,10 +46,9 @@ function triangle(fig,x1,y1,x2,y2,x3,y3){
       S[i] = [S[i][0]/2*width+width/2, S[i][1]/2*height+height/2];
     }
 
-    triangle(context,S[0][0],S[0][1],S[2][0],S[2][1],S[1][0],S[1][1]);
-    triangle(context,S[0][0],S[0][1],S[1][0],S[1][1],S[3][0],S[3][1]);
-    triangle(context,S[1][0],S[1][1],S[2][0],S[2][1],S[3][0],S[3][1]);
-    triangle(context,S[0][0],S[0][1],S[3][0],S[3][1],S[2][0],S[2][1]);
+    for(let i=0; i<F.length; i++){
+      triangle(context,S[F[i][0]][0],S[F[i][0]][1],S[F[i][1]][0],S[F[i][1]][1],S[F[i][2]][0],S[F[i][2]][1]);
+    }
   }
   
   if(document.addEventListener){
