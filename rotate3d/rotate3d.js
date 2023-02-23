@@ -2,13 +2,25 @@ const canvas = document.getElementById("target");
 const context = canvas.getContext("2d"); //2次元描画
 let degree = 0;
 
-function triangle(fig,x1,y1,x2,y2,x3,y3){
+function triangle(fig,x1,y1,x2,y2,x3,y3,s){
+  if (s==true){
     fig.beginPath(); //パスの作成
     fig.moveTo(x1,y1);
     fig.lineTo(x2,y2);
     fig.lineTo(x3,y3);
-    fig.closePath();
     fig.stroke();
+    fig.closePath();
+    fig.fillStyle = "blue";
+    fig.fill();
+  }else{
+    fig.beginPath(); 
+    fig.moveTo(x1,y1);
+    fig.lineTo(x2,y2);
+    fig.lineTo(x3,y3);
+    fig.closePath();
+    fig.fillStyle = "black";
+    fig.fill();
+  }
 }
 // 三角形の重心 (3次元)
 let center = (A) => [
@@ -19,7 +31,6 @@ let center = (A) => [
   
 function draw(){
     context.clearRect(0,0,canvas.width,canvas.height);
-    // クライアント座標系を基点としたマウスカーソルの座標を取得
     let V = [
       [0, 0, 0],
       [1, 0, 0],
@@ -36,7 +47,6 @@ function draw(){
     let height = canvas.height;
 
     let S = V;
-    let T = V;
     let c = center(S);
     degree+=1
     r=(degree*Math.PI)/180
@@ -45,24 +55,25 @@ function draw(){
     let vz = new Array(4);
 
     for(let i=0; i<4; i++){
-        vx[i] = S[i][0] - c[0];
-        vy[i] = S[i][1] - c[1];
-        vz[i] = S[i][2] - c[2];
-    
-        // ベクトルを回転
-        S[i][0] = vx[i]*Math.cos(r) + vz[i]*Math.sin(r);
-        S[i][1] = vy[i];
-        S[i][2] = -vx[i]*Math.sin(r) + vz[i]*Math.cos(r);
+      vx[i] = S[i][0] - c[0];
+      vy[i] = S[i][1] - c[1];
+      vz[i] = S[i][2] - c[2];
+  
+      // ベクトルを回転
+      S[i][0] = vx[i]*Math.cos(r) + vz[i]*Math.sin(r);
+      S[i][1] = vy[i];
+      S[i][2] = -vx[i]*Math.sin(r) + vz[i]*Math.cos(r);
 
-        for(let j=0; j<3; j++){
-            S[i][j]+=c[j];
-        }
+      for(let j=0; j<3; j++){
+          S[i][j]+=c[j];
+      }
     }
 
     // 並行移動
     for(let i=0; i<4; i++){
       S[i] = [S[i][0],S[i][1]+0.5,S[i][2]+2];
     }
+    let T = S;
 
     // ピンホールカメラ (透視投影)
     for(let i=0; i<4; i++){
@@ -75,8 +86,9 @@ function draw(){
     }
 
     for(let i=0; i<F.length; i++){
-      triangle(context,S[F[i][0]][0],S[F[i][0]][1],S[F[i][1]][0],S[F[i][1]][1],S[F[i][2]][0],S[F[i][2]][1]);
-    }  
+      triangle(context,S[F[i][0]][0],S[F[i][0]][1],S[F[i][1]][0],S[F[i][1]][1],S[F[i][2]][0],S[F[i][2]][1],true); 
+    }
+    triangle(context,T[0][0],T[0][1]+150,T[1][0],T[1][1]+150,T[2][0],T[2][1]+150,false); 
 
 }
 
