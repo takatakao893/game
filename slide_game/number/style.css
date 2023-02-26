@@ -1,0 +1,14 @@
+body{
+    background-color: bisque;
+}
+table{
+    margin: 10px auto;
+}
+td{
+    width: 112px;
+    height: 112px;
+    text-align: center;
+    margin: 2px;
+    background-color: salmon;
+    background-size: cover;
+}
