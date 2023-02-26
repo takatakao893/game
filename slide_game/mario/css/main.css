@@ -1,0 +1,12 @@
+body{
+    background-color: lightcoral;
+}
+table{
+    margin: 10px auto;
+}
+td.panel{
+    width: 112px;
+    height: 112px;
+    margin: 2px;
+    background-size: cover;
+}
