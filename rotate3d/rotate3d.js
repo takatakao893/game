@@ -8,7 +8,6 @@ function triangle(fig,x1,y1,x2,y2,x3,y3,s){
     fig.moveTo(x1,y1);
     fig.lineTo(x2,y2);
     fig.lineTo(x3,y3);
-    fig.stroke();
     fig.closePath();
     fig.fillStyle = "blue";
     fig.fill();
